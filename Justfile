@@ -171,7 +171,6 @@ build image livesys="0" clean_rootfs="1" flatpaks_file="src/flatpaks.example.txt
     just rootfs "{{ image }}"
     just rootfs-setuid
     just rootfs-include-container "{{ image }}"
-    just rootfs-include-flatpaks "{{ flatpaks_file }}"
 
     if [[ {{ livesys }} == 1 ]]; then
       just rootfs-install-livesys-scripts
