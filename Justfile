@@ -22,8 +22,8 @@ initramfs $IMAGE: init-work
     sudo podman run --privileged --rm -i -v .:/app:Z $IMAGE \
         sh <<'INITRAMFSEOF'
     set -xeuo pipefail
-    sudo dnf install -y dracut dracut-live kernel
-    INSTALLED_KERNEL=$(rpm -q kernel-core --queryformat "%{evr}.%{arch}" | tail -n 1)
+    sudo dnf install -y https://kojipkgs.fedoraproject.org//packages/dracut/102/2.fc40/x86_64/dracut-live-102-2.fc40.x86_64.rpm
+    INSTALLED_KERNEL=$(rpm -q kernel --queryformat "%{evr}" | tail -n 1)
     cat >/app/work/fake-uname <<EOF
     #!/usr/bin/env bash
 
