@@ -1,4 +1,4 @@
-name: test-bluefin
+name: Build Mariner Live ISO
 on:
   push:
   workflow_dispatch:
@@ -24,4 +24,4 @@ jobs:
 
       - name: Build ISO
         run: |
-          just build ghcr.io/ublue-os/bluefin:lts latest 1
+          just build ghcr.io/kylegospo/mariner-fedora-bootc-base:latest latest 1
