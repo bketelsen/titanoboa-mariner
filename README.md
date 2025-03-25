@@ -1,5 +1,9 @@
 # Titanoboa (Alpha)
 
+This repo has been modified to work with https://github.com/KyleGospo/mariner-fedora-bootc-base/
+
+Flatpaks have been removed from the install step, and changed have been made to handle differences between Fedora and Azure's kernel tags.
+
 A [bootc](https://github.com/bootc-dev/bootc) installer designed to install an image as quickly as possible.
 
 
