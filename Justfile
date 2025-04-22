@@ -163,7 +163,7 @@ rootfs-install-livesys-scripts: init-work
     <<"LIVESYSEOF"
     set -xeuo pipefail
     dnf="$({ which dnf5 || which dnf; } 2>/dev/null)"
-    $dnf install -y livesys-scripts
+    $dnf install -y https://kojipkgs.fedoraproject.org//packages/livesys-scripts/0.6.0/3.fc40/noarch/livesys-scripts-0.6.0-3.fc40.noarch.rpm
 
     # Determine desktop environment. Must match one of /usr/libexec/livesys/sessions.d/livesys-{desktop_env}
     desktop_env=""
@@ -214,15 +214,14 @@ squash $fs_type="squashfs": init-work
     sudo "${PODMAN}" run --privileged --rm -i -v ".:/app:Z" -v "${ROOTFS}:/rootfs:Z" registry.fedoraproject.org/fedora:41 \
         sh <<"SQUASHEOF"
     set -xeuo pipefail
-    dnf="$({ which dnf5 || which dnf; } 2>/dev/null)"
-    $dnf install -y erofs-utils
+    dnf5 install -y https://kojipkgs.fedoraproject.org//packages/erofs-utils/1.8.6/1.fc40/x86_64/erofs-fuse-1.8.6-1.fc40.x86_64.rpm
     mkfs.erofs -d0 --quiet --all-root -zlz4hc,6 -Eall-fragments,fragdedupe=inode -C1048576 /app/{{ workdir }}/squashfs.img /rootfs
     SQUASHEOF
     elif [ "$fs_type" == "squashfs" ] ; then
     sudo "${PODMAN}" run --privileged --rm -i -v ".:/app:Z" -v "${ROOTFS}:/rootfs:Z" registry.fedoraproject.org/fedora:41 \
         sh <<"SQUASHEOF"
     set -xeuo pipefail
-    $dnf install -y squashfs-tools
+    dnf5 install -y https://kojipkgs.fedoraproject.org//packages/squashfs-tools/4.6.1/4.fc40/x86_64/squashfs-tools-4.6.1-4.fc40.x86_64.rpm
     mksquashfs /rootfs /app/{{ workdir }}/squashfs.img -all-root -noappend
     SQUASHEOF
     fi
@@ -251,12 +250,11 @@ iso:
     set -xeuo pipefail
     ISOROOT="$(realpath /app/{{ isoroot }})"
     WORKDIR="$(realpath /app/{{ workdir }})"
-    dnf="$({ which dnf5 || which dnf; } 2>/dev/null)"
-    $dnf install -y grub2 grub2-efi grub2-tools grub2-tools-extra xorriso shim dosfstools
+    dnf5 install -y grub2 grub2-efi grub2-tools grub2-tools-extra xorriso shim dosfstools
     if [ "$(arch)" == "x86_64" ] ; then
-        $dnf install -y grub2-efi-x64-modules grub2-efi-x64-cdboot grub2-efi-x64
+        dnf5 install -y grub2-efi-x64-modules grub2-efi-x64-cdboot grub2-efi-x64
     elif [ "$(arch)" == "aarch64" ] ; then
-        $dnf install -y grub2-efi-aa64-modules
+        dnf5 install -y grub2-efi-aa64-modules
     fi
 
     mkdir -p $ISOROOT/EFI/BOOT
