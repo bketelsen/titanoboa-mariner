@@ -19,17 +19,17 @@ This is an experiment to see how far we can get building our own ISOs. The objec
 
 Waiting for existing installers to move to cloud native is untenable, let's see if we can remove that external dependency forever. 😈
 
+## Components
+
+- LiveCD (done in this repository)
+- [ublue-os/yai](https://github.com/ublue-os/yai) - Tauri bootc install wrapper
+
 ## Building a Live ISO
 
 ```bash
 just build ghcr.io/ublue-os/bluefin:lts
 just vm ./output.iso
 ```
-
-## TODO
-- [ ] Have an installer for the Live ISO
-- [ ] Different names for each image
-- [ ] (installer) Figure out how to copy flatpaks to the installed system
 
 ## Contributor Metrics
 
