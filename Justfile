@@ -341,7 +341,7 @@ build $image $clean="1" $livesys="1" $flatpaks_file="src/flatpaks.example.txt" $
         just delete-image "$container_image"
     fi
 
-    just rootfs-include-flatpaks "$flatpaks_file"
+    # just rootfs-include-flatpaks "$flatpaks_file"
 
     if [[ "${polkit}" == "1" ]]; then
       just rootfs-include-polkit
