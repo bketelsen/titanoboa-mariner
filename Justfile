@@ -35,7 +35,7 @@ initramfs $IMAGE: init-work
     set -xeuo pipefail
     dnf="$({ which dnf5 || which dnf; } 2>/dev/null)"
     $dnf install -y https://kojipkgs.fedoraproject.org//packages/dracut/102/2.fc40/x86_64/dracut-live-102-2.fc40.x86_64.rpm https://kojipkgs.fedoraproject.org//packages/dracut/102/2.fc40/x86_64/dracut-network-102-2.fc40.x86_64.rpm
-    INSTALLED_KERNEL=$(rpm -q kernel --queryformat "%{evr}" | tail -n 1)
+    INSTALLED_KERNEL=$(rpm -q kernel --queryformat "%{evr}.%{arch}" | tail -n 1)
     cat >/app/work/fake-uname <<EOF
     #!/usr/bin/env bash
 
